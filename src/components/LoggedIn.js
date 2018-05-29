@@ -9,7 +9,7 @@ export default class LoggedIn extends Component {
             style={{ marginTop: '2px' }}
             className='text-success far fa-check-circle'
           />
-          &nbsp;Logged in as JC dsScafdsalabre
+          &nbsp;Logged in as JC Scalabre
           <p>
             <small style={{ marginLeft: '38px' }} className='text-muted'>
               jc_scalabre@hotmail.com
