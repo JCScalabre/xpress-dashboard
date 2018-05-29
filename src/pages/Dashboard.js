@@ -35,10 +35,12 @@ export default class Dashboard extends Component {
               <PropertyCard
                 hasAppeal={false}
                 name="559 W Surf St, Chicago IL 60657"
+                target="one"
               />
               <PropertyCard
                 hasAppeal={true}
                 name="9227 Cameron Lane, Morton Grove IL 60053"
+                target="two"                
               />
               <button onClick={this.login} className="btn btn-primary">
                 <span>

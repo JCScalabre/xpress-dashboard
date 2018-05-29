@@ -19,14 +19,14 @@ export default class PropertyCard extends Component {
     return (
       <div className="card mb-4">
         <div className="card-header">
-          <h4>{this.props.name}</h4>
+          <h4>{this.props.name}{this.props.target}</h4>
           <h5 className="mb-0">
             <p className="mb-1">
               <small>
                 <a
                   onClick={this.collapse}
                   data-toggle="collapse"
-                  href="#collapseID"
+                  href={'#' + this.props.target}
                 >
                   {this.state.expanded ? (
                     <span>
@@ -48,7 +48,8 @@ export default class PropertyCard extends Component {
                 </a>
               </small>
             </p>
-            <div className="collapse" id="collapseID">
+
+            <div className="collapse" id={this.props.target}>
               Labore adipisicing elit nisi aliqua nostrud sint aliquip mollit
               nostrud.
             </div>
