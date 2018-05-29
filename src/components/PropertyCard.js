@@ -4,10 +4,9 @@ export default class PropertyCard extends Component {
   constructor(props) {
     super(props);
     this.state = { expanded: false };
-    this.collapse = this.collapse.bind(this);
   }
 
-  collapse() {
+  collapse = () => {
     if (this.state.expanded) {
       this.setState({ expanded: false });
     } else {
