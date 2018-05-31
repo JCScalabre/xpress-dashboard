@@ -16,8 +16,6 @@ export default class App extends Component {
 		};
 	}
 
-	
-
 	login = () => {
 		this.setState({ loggedIn: true });
 	};
