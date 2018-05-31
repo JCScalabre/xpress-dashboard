@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 // Components:
 import NavBar from "./components/NavBar.js";
-import NavBar1 from "./components/NavBar1.js";
 import Properties from "./pages/Properties.js";
 import Referral from "./pages/Referral.js";
 import Profile from "./pages/Profile.js";
@@ -39,6 +38,7 @@ export default class App extends Component {
 				this.setState({ page: "profile" });
 				break;
 			case "Referrals":
+			console.log("Here")
 				this.setState({ page: "referral" });
 				break;
 			default:
@@ -75,7 +75,7 @@ export default class App extends Component {
 			<div>
 				{this.state.loggedIn ? (
 					<div>
-						<NavBar1
+						<NavBar
 							topItems={topItems}
 							bottomItems={bottomItems}
 							login={this.login}
