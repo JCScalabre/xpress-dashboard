@@ -1,19 +1,15 @@
 // React:
 import React, { Component } from "react";
 // Components:
-import NavBar from "../components/NavBar.js";
 import LoggedIn from "../components/LoggedIn.js";
 import PropertyCard from "../components/PropertyCard.js";
 import Modal from "react-responsive-modal";
 import AddPropertyModalContent from "../components/modals/AddPropertyModal.js";
-// CSS:
-import "../content/css/dashboard.css";
 
-export default class Dashboard extends Component {
+export default class Properties extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: true,
       modalOpen: false
     };
   }
@@ -42,13 +38,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        <NavBar
-          login={this.login}
-          logout={this.logout}
-          loggedIn={this.state.loggedIn}
-        />
         <div className="container">
-          {this.state.loggedIn ? (
             <div>
               <LoggedIn />
               <PropertyCard
@@ -70,9 +60,7 @@ export default class Dashboard extends Component {
                 </span>
               </button>
             </div>
-          ) : (
-            <h1 className="display-4 mb-4">Please Login to view this page</h1>
-          )}
+         
         </div>
 
         <Modal
