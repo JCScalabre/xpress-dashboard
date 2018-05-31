@@ -95,7 +95,7 @@ export default class NavBar extends Component {
                     </NavBarMobile>
                 </Responsive>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-                    <NavBarDesktop onClick={this.props.test} topItems={topItems} bottomItems={bottomItems} />
+                    <NavBarDesktop topItems={topItems} bottomItems={bottomItems} />
                     <NavBarChildren>{children}</NavBarChildren>
                 </Responsive>
             </div>
