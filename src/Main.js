@@ -34,8 +34,8 @@ export default class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: false,
-			page: ""
+			loggedIn: true,
+			page: "referral"
 		};
 	}
 
