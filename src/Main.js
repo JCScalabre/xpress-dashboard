@@ -4,6 +4,8 @@ import NavBar from "./components/NavBar.js";
 import Properties from "./pages/Properties.js";
 import Referral from "./pages/Referral.js";
 import Profile from "./pages/Profile.js";
+import Login from "./pages/Login.js";
+import {Message} from "semantic-ui-react"
 // CSS:
 import "./content/css/main.css";
 // Firebase
@@ -34,8 +36,9 @@ export default class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: true,
-			page: "referral"
+			loggedIn: false,
+			page: "",
+			email: ""
 		};
 	}
 
@@ -43,17 +46,20 @@ export default class Main extends Component {
 		this.firebaseAuth();
 	};
 
+	handleChange = ( e, {name, value}) => this.setState({[name]:value})
+
+	
 	sendEmail = () => {
-		// if (this.state.value.trim() !== "") {
-		const email = "jc_scalabre@hotmail.com";
+		if (this.state.email.trim() !== "") {
+		const email = this.state.email;
 		firebase
 			.auth()
 			.sendSignInLinkToEmail(email, actionCodeSettings)
 			.then(
 				function() {
 					// The link was successfully sent. Inform the user.
-					console.log("Email Sent");
-					this.setState({ value: "" });
+					console.log("Email Sent" + email);
+					this.setState({ email: "" });
 					// Save the email locally so you don't need to ask the user for it again
 					// if they open the link on the same device.
 					window.localStorage.setItem("emailForSignIn", email);
@@ -62,11 +68,12 @@ export default class Main extends Component {
 			.catch(
 				function(error) {
 					console.log(error);
+
 					// alert('Error!');
 					// Some error occurred, you can inspect the code: error.code
 				}
 			);
-		// }
+		}
 	};
 
 	firebaseAuth = () => {
@@ -153,11 +160,7 @@ export default class Main extends Component {
 						</NavBar>
 					</div>
 				) : (
-					/*Replace this with Login component*/
-					<div>
-						<h1 className="display-4 mb-4">Please Login</h1>
-						<button onClick={this.sendEmail}>Send Email</button>
-					</div>
+					<Login value={this.state.email} handleChange={this.handleChange} handleSubmit={this.sendEmail} />
 				)}
 			</div>
 		);

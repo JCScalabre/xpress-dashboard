@@ -95,7 +95,7 @@ export default class NavBar extends Component {
                 </Responsive>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth}>
                     <NavBarDesktop topItems={topItems} bottomItems={bottomItems} navigate={navigate} />
-                    <div style={{marginLeft: "200px"}}>{children}</div>
+                    <div style={{marginLeft: "400px"}}>{children}</div>
                 </Responsive>
             </div>
         );
