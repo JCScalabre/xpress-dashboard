@@ -15,17 +15,19 @@ const NavBarMobile = ({
     onPusherClick,
     onToggle,
     bottomItems,
-    visible
+    visible,
+    navigate
 }) => (
     <Sidebar.Pushable>
         <Sidebar
             as={Menu}
             animation="overlay"
             icon="labeled"
-            items={topItems}
             vertical
             visible={visible}
-        />
+        >
+            {_.map(topItems, item => <Menu.Item {...item} onClick={ () => {navigate(item.key)} } />)}
+        </Sidebar>
         <Sidebar.Pusher
             dimmed={visible}
             onClick={onPusherClick}
@@ -47,20 +49,16 @@ const NavBarMobile = ({
     </Sidebar.Pushable>
 );
 
-const NavBarDesktop = ({ topItems, bottomItems }) => (
+const NavBarDesktop = ({ topItems, bottomItems, navigate }) => (
     <Menu fixed="left" vertical  icon="labeled">
         <Menu.Item>
             <Image size="small" href="https://xpresstaxappeals.com/" src={require('../content/images/xta_logo.png')} alt="XpressTaxAppeals"/>
         </Menu.Item>
-            {_.map(topItems, item => <Menu.Item {...item} />)}
+            {_.map(topItems, item => <Menu.Item {...item} onClick={ () => {navigate(item.key)} } />)}
         <Menu.Menu>
             {_.map(bottomItems, item => <Menu.Item {...item} />)}
         </Menu.Menu>
     </Menu>
-);
-
-const NavBarChildren = ({ children }) => (
-    <Container style={{ marginTop: "5em" }}>{children}</Container>
 );
 
 export default class NavBar extends Component {
@@ -78,7 +76,7 @@ export default class NavBar extends Component {
     handleToggle = () => this.setState({ visible: !this.state.visible });
 
     render() {
-        const { children, topItems, bottomItems } = this.props;
+        const { children, topItems, bottomItems, navigate } = this.props;
         const { visible } = this.state;
 
         return (
@@ -90,13 +88,15 @@ export default class NavBar extends Component {
                         onToggle={this.handleToggle}
                         bottomItems={bottomItems}
                         visible={visible}
+                        navigate={navigate}
                     >
-                    <NavBarChildren>{children}</NavBarChildren>
+                    <Container style={{ marginTop: "5em" }}>{children}</Container>
                     </NavBarMobile>
                 </Responsive>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-                    <NavBarDesktop onClick={this.props.test} topItems={topItems} bottomItems={bottomItems} />
-                    <NavBarChildren>{children}</NavBarChildren>
+                    <NavBarDesktop topItems={topItems} bottomItems={bottomItems} navigate={navigate} />
+                    <div style={{marginLeft: "200px"}}>{children}</div>
+                    
                 </Responsive>
             </div>
         );

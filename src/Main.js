@@ -7,6 +7,13 @@ import Profile from "./pages/Profile.js";
 // CSS:
 import "./content/css/main.css";
 
+const topItems = [
+  { as: "a", content: "Dashboard/Home", key: "dashboard", icon: "dashboard" },
+  { as: "a", content: "Profile", key: "profile", icon: "user" },
+  { as: "a", content: "Properties", key: "properties", icon: "home" },	
+  { as: "a", content: "Referrals", key: "referral", icon: "location arrow" }
+];
+
 export default class App extends Component {
 	constructor(props) {
 		super(props);
@@ -29,20 +36,21 @@ export default class App extends Component {
 	}
 
 	// Sets state of page based on which NavBar element was clicked:
-	navigate = event => {
+	navigate = key => {
 		// console.log(event.target.text)
-		switch (event.target.text) {
-			case "Profile":
-				this.setState({ page: "profile" });
-				break;
-			case "Referrals":
-			console.log("Here")
-				this.setState({ page: "referral" });
-				break;
-			default:
-				this.setState({ page: "properties" });
-				break;
-		}
+		// switch (event.target.text) {
+		// 	case "Profile":
+		// 		this.setState({ page: "profile" });
+		// 		break;
+		// 	case "Referrals":
+		// 	console.log("Here")
+		// 		this.setState({ page: "referral" });
+		// 		break;
+		// 	default:
+		// 		this.setState({ page: "properties" });
+		// 		break;
+    // }
+    	this.setState({ page: key });
 	};
 
 	// Conditionally Render Page based on this.state.page
@@ -59,13 +67,6 @@ export default class App extends Component {
 
 	render = () => {
 
-		const topItems = [
-			{ as: "a", content: "Dashboard/Home", key: "dashboard", icon: "dashboard", onClick:this.navigate },
-			{ as: "a", content: "Profile", key: "profile", icon: "user", onClick:this.navigate },
-			{ as: "a", content: "Properties", key: "properties", icon: "home", onClick:this.navigate },	
-			{ as: "a", content: "Referrals", key: "referrals", icon: "location arrow", onClick:this.navigate }
-		];
-		
 		const bottomItems = [
 			{ as: "a", content: "Logout", key: "logout", icon: "sign out", onClick:this.logout}
 		];
@@ -80,8 +81,9 @@ export default class App extends Component {
 							logout={this.logout}
 							loggedIn={this.state.loggedIn}
 							navigate={this.navigate}	
-						/>
+						>
 						{this.renderPage(this.state.page)}
+						</NavBar>
 					</div>
 				) : (
 					<h1 className="display-4 mb-4">
