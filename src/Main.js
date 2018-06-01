@@ -31,25 +31,8 @@ export default class App extends Component {
 		this.setState({ loggedIn: false });
 	};
 
-	test = () => {
-		console.log("Test")
-	}
-
 	// Sets state of page based on which NavBar element was clicked:
 	navigate = key => {
-		// console.log(event.target.text)
-		// switch (event.target.text) {
-		// 	case "Profile":
-		// 		this.setState({ page: "profile" });
-		// 		break;
-		// 	case "Referrals":
-		// 	console.log("Here")
-		// 		this.setState({ page: "referral" });
-		// 		break;
-		// 	default:
-		// 		this.setState({ page: "properties" });
-		// 		break;
-    // }
     	this.setState({ page: key });
 	};
 

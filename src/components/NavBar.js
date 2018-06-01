@@ -52,7 +52,7 @@ const NavBarMobile = ({
 const NavBarDesktop = ({ topItems, bottomItems, navigate }) => (
     <Menu fixed="left" vertical  icon="labeled">
         <Menu.Item>
-            <Image size="small" href="https://xpresstaxappeals.com/" src={require('../content/images/xta_logo.png')} alt="XpressTaxAppeals"/>
+            <Image size="medium" href="https://xpresstaxappeals.com/" src={require('../content/images/xta_logo.png')} alt="XpressTaxAppeals"/>
         </Menu.Item>
             {_.map(topItems, item => <Menu.Item {...item} onClick={ () => {navigate(item.key)} } />)}
         <Menu.Menu>

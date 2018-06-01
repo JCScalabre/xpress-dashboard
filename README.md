@@ -1,3 +1,3 @@
-## Mockup of new Xpressfghfghf site Dashboard
+## Mockup of new Xpress site Dashboard
 
 To run this project locally, run `npm install` and then `npm start`.
