@@ -4,7 +4,11 @@ import React, { Component } from "react";
 // import Modal from "react-responsive-modal";
 
 export default class Profile extends Component {
-  render() {
-    return <h1>Profile Page</h1>;
-  }
+	render() {
+		return (
+			<div className="container">
+				<h1>Profile Page</h1>
+			</div>
+		);
+	}
 }
