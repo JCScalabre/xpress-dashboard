@@ -5,6 +5,7 @@ import Properties from "./pages/Properties.js";
 import Referral from "./pages/Referral.js";
 import Profile from "./pages/Profile.js";
 import Login from "./pages/Login.js";
+import Cookie from "./utils/Cookie.js"
 // CSS:
 import "./content/css/main.css";
 // Firebase
@@ -13,6 +14,7 @@ import actionCodeSettings from "./utils/FirebaseActionCodeSettings.js";
 const firebase = require("firebase/app");
 require("firebase/auth");
 firebase.initializeApp(FBconfig);
+// Cookie:
 
 const topItems = [
 	{ as: "a", content: "Dashboard/Home", key: "dashboard", icon: "dashboard" },
@@ -35,53 +37,52 @@ export default class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: true,
+			loggedIn: false,
 			page: "",
 			email: "",
-			isSuccess: false, 
+			isSuccess: false,
 			message: ""
 		};
 	}
 
 	componentWillMount = () => {
+		Cookie.handleCookie();
 		this.firebaseAuth();
 	};
 
-	handleChange = ( e, {name, value}) => this.setState({[name]:value})
+	handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
-	
 	sendEmail = () => {
 		if (this.state.email.trim() !== "") {
-		const email = this.state.email;
-		firebase
-			.auth()
-			.sendSignInLinkToEmail(email, actionCodeSettings)
-			.then(
-				function() {
-					// The link was successfully sent. Inform the user.
-					console.log("Email Sent" + email);
-					this.setState({ 
-						email: "",
-						isSuccess: true,
-						message: `Email successfully sent to '${email}'. Click the link enclosed to sign into your dashboard.`
-					});
-					// Save the email locally so you don't need to ask the user for it again
-					// if they open the link on the same device.
-					window.localStorage.setItem("emailForSignIn", email);
-
-				}.bind(this)
-			)
-			.catch(
-				function(error) {
-					console.log(error);
-					// alert('Error!');
-					// Some error occurred, you can inspect the code: error.code
-					this.setState({
-						isSuccess: false,
-						message: `Error: ${email} is not a valid email address. Please try again with a valid email.`
-					});
-				}.bind(this)
-			);
+			const email = this.state.email;
+			firebase
+				.auth()
+				.sendSignInLinkToEmail(email, actionCodeSettings)
+				.then(
+					function() {
+						// The link was successfully sent. Inform the user.
+						console.log("Email Sent" + email);
+						this.setState({
+							email: "",
+							isSuccess: true,
+							message: `Email successfully sent to '${email}'. Click the link enclosed to sign into your dashboard.`
+						});
+						// Save the email locally so you don't need to ask the user for it again
+						// if they open the link on the same device.
+						window.localStorage.setItem("emailForSignIn", email);
+					}.bind(this)
+				)
+				.catch(
+					function(error) {
+						console.log(error);
+						// alert('Error!');
+						// Some error occurred, you can inspect the code: error.code
+						this.setState({
+							isSuccess: false,
+							message: `Error: ${email} is not a valid email address. Please try again with a valid email.`
+						});
+					}.bind(this)
+				);
 		}
 	};
 
@@ -101,16 +102,15 @@ export default class Main extends Component {
 					function(result) {
 						// Login was successful
 						this.setState({ loggedIn: true });
+						// Create cookie
 						// Clear email from storage.
 						window.localStorage.removeItem("emailForSignIn");
 					}.bind(this)
 				)
-				.catch(
-					function(error) {
-						// Login was NOT successful
-						console.log(error);
-					}
-				);
+				.catch(function(error) {
+					// Login was NOT successful
+					console.log(error);
+				});
 		} else {
 			// User is not logged in
 		}
@@ -174,7 +174,8 @@ export default class Main extends Component {
 						handleChange={this.handleChange}
 						handleSubmit={this.sendEmail}
 						isSuccess={this.state.isSuccess}
-						message={this.state.message} />
+						message={this.state.message}
+					/>
 				)}
 			</div>
 		);
