@@ -7,7 +7,7 @@ import Profile from "./pages/Profile.js";
 import Login from "./pages/Login.js";
 import Cookie from "./utils/Cookie.js"
 // CSS:
-import "./content/css/main.css";
+import "./Main.css";
 // Firebase
 import FBconfig from "./utils/FirebaseConfig.js";
 import actionCodeSettings from "./utils/FirebaseActionCodeSettings.js";
