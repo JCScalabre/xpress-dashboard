@@ -38,7 +38,9 @@ export default class Main extends Component {
 		this.state = {
 			loggedIn: false,
 			page: "",
-			email: ""
+			email: "",
+			isSuccess: false, 
+			message: ""
 		};
 	}
 
@@ -59,19 +61,27 @@ export default class Main extends Component {
 				function() {
 					// The link was successfully sent. Inform the user.
 					console.log("Email Sent" + email);
-					this.setState({ email: "" });
+					this.setState({ 
+						email: "",
+						isSuccess: true,
+						message: `Check your Inbox: We sent an email to you at ${email}. It has the link that'll sign you in.`
+					});
 					// Save the email locally so you don't need to ask the user for it again
 					// if they open the link on the same device.
 					window.localStorage.setItem("emailForSignIn", email);
+
 				}.bind(this)
 			)
 			.catch(
 				function(error) {
 					console.log(error);
-
 					// alert('Error!');
 					// Some error occurred, you can inspect the code: error.code
-				}
+					this.setState({
+						isSuccess: false,
+						message: `${email} has an invalid format. Please provide a valid email address.`
+					});
+				}.bind(this)
 			);
 		}
 	};
@@ -160,7 +170,12 @@ export default class Main extends Component {
 						</NavBar>
 					</div>
 				) : (
-					<Login value={this.state.email} handleChange={this.handleChange} handleSubmit={this.sendEmail} />
+					<Login
+						value={this.state.email}
+						handleChange={this.handleChange}
+						handleSubmit={this.sendEmail}
+						isSuccess={this.state.isSuccess}
+						message={this.state.message} />
 				)}
 			</div>
 		);
