@@ -1,7 +1,6 @@
 // React:
 import React, { Component } from "react";
 // Components:
-import LoggedIn from "../components/LoggedIn.js";
 import PropertyCard from "../components/PropertyCard.js";
 import Modal from "react-responsive-modal";
 import AddPropertyModalContent from "../components/modals/AddPropertyModal.js";
@@ -40,17 +39,34 @@ export default class Properties extends Component {
 			<div>
 				<div className="container">
 					<div>
-						<LoggedIn />
-						<PropertyCard
-							hasAppeal={false}
-							name="559 W Surf St, Chicago IL 60657"
-							target="one"
-						/>
-						<PropertyCard
-							hasAppeal={true}
-							name="9227 Cameron Lane, Morton Grove IL 60053"
-							target="two"
-						/>
+						<div className="mt-3">
+							<h3>
+								<i
+									style={{ marginTop: "2px" }}
+									className="text-success far fa-check-circle"
+								/>
+								&nbsp;Logged in as {this.props.data.ContactDetails.Name}
+								<p>
+									<small
+										style={{ marginLeft: "38px" }}
+										className="text-muted"
+									>
+										{this.props.data.ContactDetails.Email}
+									</small>
+								</p>
+							</h3>
+							<h1 className="display-3 mb-4 mt-0">Your Properties</h1>
+						</div>
+						{console.log(this.props.data)}
+						{this.props.data.PropertyDetailList.map((data, i) => {
+							return (
+								<PropertyCard
+									data={data}
+									target={i}
+									key={i}
+								/>
+							);
+						})}
 						<button
 							onClick={this.openAddPropertyModal}
 							className="btn btn-primary"

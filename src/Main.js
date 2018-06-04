@@ -6,6 +6,8 @@ import Referral from "./pages/Referral.js";
 import Profile from "./pages/Profile.js";
 import Login from "./pages/Login.js";
 import Cookie from "./utils/Cookie.js";
+// Data
+import { data } from "./data/ruthfigueroa0528atgmailcom.js";
 // CSS:
 import "./Main.css";
 // Firebase
@@ -37,11 +39,12 @@ export default class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: false,
+			loggedIn: true,
 			page: "",
 			email: "",
 			isSuccess: false,
-			message: ""
+			message: "",
+			data: data
 		};
 	}
 
@@ -147,11 +150,11 @@ export default class Main extends Component {
 			case "dashboard":
 				return <Home />;
 			case "profile":
-				return <Profile />;
+				return <Profile data={this.state.data} />;
 			case "referral":
 				return <Referral />;
 			default:
-				return <Properties />;
+				return <Properties data={this.state.data} />;
 		}
 	};
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class PropertyCard extends Component {
   constructor(props) {
@@ -12,25 +12,25 @@ export default class PropertyCard extends Component {
     } else {
       this.setState({ expanded: true });
     }
-  }
- 
+  };
+
   render() {
     return (
       <div className="card mb-4">
         <div className="card-header">
-          <h4>{this.props.name}</h4>
+          <h4>{this.props.data.appealCandidate.Name}</h4>
           <h5 className="mb-0">
             <p className="mb-1">
               <small>
                 <a
                   onClick={this.collapse}
                   data-toggle="collapse"
-                  href={'#' + this.props.target}
+                  href={"#" + this.props.target}
                 >
                   {this.state.expanded ? (
                     <span>
                       <i
-                        style={{ marginLeft: '2px' }}
+                        style={{ marginLeft: "2px" }}
                         className="fas fa-caret-down"
                       />
                       &nbsp;Less Information
@@ -38,7 +38,7 @@ export default class PropertyCard extends Component {
                   ) : (
                     <span>
                       <i
-                        style={{ marginLeft: '2px' }}
+                        style={{ marginLeft: "2px" }}
                         className="fas fa-caret-right"
                       />
                       &nbsp;More Information
@@ -49,8 +49,10 @@ export default class PropertyCard extends Component {
             </p>
 
             <div className="collapse" id={this.props.target}>
-              Labore adipisicing elit nisi aliqua nostrud sint aliquip mollit
-              nostrud.
+              PIN: {this.props.data.subjectPropertyData.PinDisplayText}
+              <p>
+                Property Class: {this.props.data.subjectPropertyData.ClassNum}
+              </p>
             </div>
           </h5>
         </div>
