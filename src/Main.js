@@ -5,7 +5,6 @@ import Properties from "./pages/Properties.js";
 import Referral from "./pages/Referral.js";
 import Profile from "./pages/Profile.js";
 import Login from "./pages/Login.js";
-import {Message} from "semantic-ui-react"
 // CSS:
 import "./content/css/main.css";
 // Firebase
