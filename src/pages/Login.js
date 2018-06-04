@@ -14,7 +14,7 @@ export default class Login extends Component {
                     <Form>
                         <Header as='h2'>Sign In</Header>
                         <Divider />
-                        <p>Please enter your email to receive a link that will sign you in instantly.</p>
+                        <p>To sign into your personal dashboard, enter your email and click on the link enclosed.</p>
                         <Form.Input
                             icon="mail"
                             iconPosition="left"
