@@ -13,9 +13,9 @@ function getCookie(cname) {
     return "";
 }
 
-function setCookie(cname, cvalue, exhours) {
+function setCookie(cname, cvalue, exSeconds) {
     var d = new Date();
-    d.setTime(d.getTime() + exhours * 1000);
+    d.setTime(d.getTime() + exSeconds * 1000);
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
@@ -31,15 +31,4 @@ function deleteAllCookies() {
     }
 }
 
-function handleCookie() {
-    // deleteAllCookies();
-    var email = getCookie("email");
-    if (email === "") {
-        console.log("No cookie, so render login component")
-        setCookie("email", "jc_scalabre@hotmail.com", 60);
-    } else {
-        console.log("Cookie exists for: " + email + ". So set state to logged in and bypass firebase auth.")
-    }
-}
-
-export default { handleCookie }
+export default { getCookie, setCookie, deleteAllCookies };

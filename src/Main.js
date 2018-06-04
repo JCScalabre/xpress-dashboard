@@ -5,7 +5,7 @@ import Properties from "./pages/Properties.js";
 import Referral from "./pages/Referral.js";
 import Profile from "./pages/Profile.js";
 import Login from "./pages/Login.js";
-import Cookie from "./utils/Cookie.js"
+import Cookie from "./utils/Cookie.js";
 // CSS:
 import "./Main.css";
 // Firebase
@@ -46,11 +46,52 @@ export default class Main extends Component {
 	}
 
 	componentWillMount = () => {
-		Cookie.handleCookie();
-		this.firebaseAuth();
+		this.handleCookie();
 	};
 
 	handleChange = (e, { name, value }) => this.setState({ [name]: value });
+
+	handleCookie = () => {
+		// deleteAllCookies();
+		var email = Cookie.getCookie("email");
+		if (email === "") {
+			this.firebaseAuth();
+		} else {
+			// Cookie exists so set state to logged in:
+			this.setState({ loggedIn: true });
+		}
+	};
+
+	firebaseAuth = () => {
+		if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+			var email = window.localStorage.getItem("emailForSignIn");
+			if (!email) {
+				// User opened the link on a different device. To prevent session fixation
+				// attacks, ask the user to provide the associated email again. For example:
+				email = window.prompt("Please provide your email for confirmation");
+			}
+			// The client SDK will parse the code from the link for you.
+			firebase
+				.auth()
+				.signInWithEmailLink(email, window.location.href)
+				.then(
+					function(result) {
+						// Login was successful
+						this.setState({ loggedIn: true });
+						// Create cookie
+						Cookie.setCookie("email", "jc_scalabre@hotmail.com", 60);
+						// Clear email from storage.
+						window.localStorage.removeItem("emailForSignIn");
+					}.bind(this)
+				)
+				.catch(function(error) {
+					// Login was NOT successful
+					console.log(error);
+				});
+		} else {
+			// User is not logged in
+		}
+	};
 
 	sendEmail = () => {
 		if (this.state.email.trim() !== "") {
@@ -86,41 +127,12 @@ export default class Main extends Component {
 		}
 	};
 
-	firebaseAuth = () => {
-		if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-			var email = window.localStorage.getItem("emailForSignIn");
-			if (!email) {
-				// User opened the link on a different device. To prevent session fixation
-				// attacks, ask the user to provide the associated email again. For example:
-				email = window.prompt("Please provide your email for confirmation");
-			}
-			// The client SDK will parse the code from the link for you.
-			firebase
-				.auth()
-				.signInWithEmailLink(email, window.location.href)
-				.then(
-					function(result) {
-						// Login was successful
-						this.setState({ loggedIn: true });
-						// Create cookie
-						// Clear email from storage.
-						window.localStorage.removeItem("emailForSignIn");
-					}.bind(this)
-				)
-				.catch(function(error) {
-					// Login was NOT successful
-					console.log(error);
-				});
-		} else {
-			// User is not logged in
-		}
-	};
-
 	login = () => {
 		this.setState({ loggedIn: true });
 	};
 
 	logout = () => {
+		Cookie.deleteAllCookies();
 		this.setState({ loggedIn: false });
 	};
 
