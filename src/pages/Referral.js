@@ -22,8 +22,8 @@ export default class Referral extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				<div className="row mt-4 justify-content-center">
+			<div className="container text-center">
+				<div className="row d-block mt-4">
 					<img
 						style={{ height: "200px" }}
 						src={require("../content/images/referral.png")}
@@ -35,16 +35,16 @@ export default class Referral extends Component {
 						src={require("../content/images/gift.png")}
 						alt=""
 					/>
-				</div>
-				<div className="row justify-content-center">
-					<h1 className="display-3 text-uppercase mt-3">
-						Refer Friends. Get Rewards.
-					</h1>
-				</div>
-				<div className="row justify-content-center">
+					<h1 className="display-3">Refer Friends. Get Rewards.</h1>
+					<h1>How does it work?</h1>
+					<h3>
+						We provide a custom link and code that identifies you as the refferer. For every individual 
+						that you refer, you and your friend will earn $20
+						after they sign up. Eligible properties include single family homes inside of Cook County.
+					</h3>
 					<button
 						onClick={this.openReferralModal}
-						className="btn btn-lg btn-success mt-4"
+						className="btn btn-lg btn-success"
 					>
 						Click To Get Started
 					</button>
