@@ -35,7 +35,7 @@ export default class Main extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: false,
+			loggedIn: true,
 			page: "",
 			email: "",
 			isSuccess: false, 
@@ -63,7 +63,7 @@ export default class Main extends Component {
 					this.setState({ 
 						email: "",
 						isSuccess: true,
-						message: `Check your Inbox: We sent an email to you at ${email}. It has the link that'll sign you in.`
+						message: `Email successfully sent to '${email}'. Click the link enclosed to sign into your dashboard.`
 					});
 					// Save the email locally so you don't need to ask the user for it again
 					// if they open the link on the same device.
@@ -78,7 +78,7 @@ export default class Main extends Component {
 					// Some error occurred, you can inspect the code: error.code
 					this.setState({
 						isSuccess: false,
-						message: `${email} has an invalid format. Please provide a valid email address.`
+						message: `Error: ${email} is not a valid email address. Please try again with a valid email.`
 					});
 				}.bind(this)
 			);
@@ -112,7 +112,7 @@ export default class Main extends Component {
 					}
 				);
 		} else {
-			console.log("You are not logged in!")
+			// User is not logged in
 		}
 	};
 
