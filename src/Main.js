@@ -6,7 +6,7 @@ import Referral from "./pages/Referral.js";
 import Profile from "./pages/Profile.js";
 import Login from "./pages/Login.js";
 // CSS:
-import "./content/css/main.css";
+import "./Main.css";
 // Firebase
 import FBconfig from "./utils/FirebaseConfig.js";
 import actionCodeSettings from "./utils/FirebaseActionCodeSettings.js";

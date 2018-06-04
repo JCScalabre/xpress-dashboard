@@ -26,13 +26,13 @@ export default class Referral extends Component {
 				<div className="row d-block mt-4">
 					<img
 						style={{ height: "200px" }}
-						src={require("../content/images/referral.png")}
+						src={"/images/referral.png"}
 						alt=""
 					/>
 					<i className="fas fa-arrow-right my-auto fa-4x ml-3" />
 					<img
 						style={{ height: "200px" }}
-						src={require("../content/images/gift.png")}
+						src={"/images/gift.png"}
 						alt=""
 					/>
 					<h1 className="display-3">Refer Friends. Get Rewards.</h1>

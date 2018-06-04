@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Container, Header, Divider, Message } from 'semantic-ui-react'
+import { Button, Form, Container, Header, Divider, Message, Image, Segment } from 'semantic-ui-react'
 
 export default class Login extends Component {
 
@@ -7,7 +7,10 @@ export default class Login extends Component {
 
         return (
             <div>
-                <Container style={{marginTop: "200px", width:"30%", color:"grey"}}>
+                <Container style={{marginTop: "200px", width:"30%", color:"grey", backgroundColor: "white", padding:"30px"}}>
+                    <Container style={{marginBottom: "30px"}}>
+                        <Image centered src='/images/xta_logo.png' size='medium'/>
+                    </Container>
                     <Form>
                         <Header as='h2'>Sign In</Header>
                         <Divider />
