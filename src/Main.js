@@ -152,7 +152,7 @@ export default class Main extends Component {
 			case "profile":
 				return <Profile data={this.state.data} />;
 			case "referral":
-				return <Referral />;
+				return <Referral data={this.state.data} />;
 			default:
 				return <Properties data={this.state.data} />;
 		}

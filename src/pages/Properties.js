@@ -40,21 +40,21 @@ export default class Properties extends Component {
 				<div className="container">
 					<div>
 						<div className="mt-3">
-							<h3>
+							<h2>
 								<i
-									style={{ marginTop: "2px" }}
+									style={{ marginTop: "2px", marginRight: "2px" }}
 									className="text-success far fa-check-circle"
 								/>
 								&nbsp;Logged in as {this.props.data.ContactDetails.Name}
 								<p>
 									<small
-										style={{ marginLeft: "38px" }}
+										style={{ marginLeft: "32px" }}
 										className="text-muted"
 									>
 										{this.props.data.ContactDetails.Email}
 									</small>
 								</p>
-							</h3>
+							</h2>
 							<h1 className="display-3 mb-4 mt-0">Your Properties</h1>
 						</div>
 						{console.log(this.props.data)}

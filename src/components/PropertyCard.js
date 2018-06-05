@@ -18,37 +18,33 @@ export default class PropertyCard extends Component {
     return (
       <div className="card mb-4">
         <div className="card-header">
-          <h4>{this.props.data.appealCandidate.Name}</h4>
-          <h5 className="mb-0">
-            <p className="mb-1">
-              <small>
-                <a
-                  onClick={this.collapse}
-                  data-toggle="collapse"
-                  href={"#" + this.props.target}
-                >
-                  {this.state.expanded ? (
-                    <span>
-                      <i
-                        style={{ marginLeft: "2px" }}
-                        className="fas fa-caret-down"
-                      />
-                      &nbsp;Less Information
-                    </span>
-                  ) : (
-                    <span>
-                      <i
-                        style={{ marginLeft: "2px" }}
-                        className="fas fa-caret-right"
-                      />
-                      &nbsp;More Information
-                    </span>
-                  )}
-                </a>
-              </small>
-            </p>
+          <h3>{this.props.data.appealCandidate.Name}</h3>
+          <h5 className="mt-0">
+            <a
+              onClick={this.collapse}
+              data-toggle="collapse"
+              href={"#" + this.props.target}
+            >
+              {this.state.expanded ? (
+                <span className="mb-2">
+                  <i
+                    style={{ marginLeft: "2px" }}
+                    className="fas fa-caret-down"
+                  />
+                  &nbsp;Less Information
+                </span>
+              ) : (
+                <span>
+                  <i
+                    style={{ marginLeft: "2px" }}
+                    className="fas fa-caret-right"
+                  />
+                  &nbsp;More Information
+                </span>
+              )}
+            </a>
 
-            <div className="collapse" id={this.props.target}>
+            <div className="collapse mt-2" id={this.props.target}>
               PIN: {this.props.data.subjectPropertyData.PinDisplayText}
               <p>
                 Property Class: {this.props.data.subjectPropertyData.ClassNum}
