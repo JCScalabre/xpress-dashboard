@@ -13,14 +13,6 @@ export default class Properties extends Component {
 		};
 	}
 
-	login = () => {
-		this.setState({ loggedIn: true });
-	};
-
-	logout = () => {
-		this.setState({ loggedIn: false });
-	};
-
 	addProperty = data => {
 		console.log("Adding this property to DB: ");
 		console.log(data);
@@ -36,48 +28,37 @@ export default class Properties extends Component {
 
 	render() {
 		return (
-			<div>
-				<div className="container">
-					<div>
-						<div className="mt-3">
-							<h2>
-								<i
-									style={{ marginTop: "2px", marginRight: "2px" }}
-									className="text-success far fa-check-circle"
-								/>
-								&nbsp;Logged in as {this.props.data.ContactDetails.Name}
-								<p>
-									<small
-										style={{ marginLeft: "32px" }}
-										className="text-muted"
-									>
-										{this.props.data.ContactDetails.Email}
-									</small>
-								</p>
-							</h2>
-							<h1 className="display-3 mb-4 mt-0">Your Properties</h1>
-						</div>
-						{console.log(this.props.data)}
-						{this.props.data.PropertyDetailList.map((data, i) => {
-							return (
-								<PropertyCard
-									data={data}
-									target={i}
-									key={i}
-								/>
-							);
-						})}
-						<button
-							onClick={this.openAddPropertyModal}
-							className="btn btn-primary"
-						>
-							<span>
-								<i className="fas fa-plus" /> Add Property
-							</span>
-						</button>
-					</div>
+			<div className="container">
+				<div>
+					<h2 className="mt-4 mb-0">
+						<i
+							style={{ marginTop: "2px", marginRight: "2px" }}
+							className="text-success far fa-check-circle"
+						/>
+						&nbsp;Logged in as {this.props.data.ContactDetails.Name}
+						<p>
+							<small
+								style={{ marginLeft: "32px" }}
+								className="text-muted"
+							>
+								{this.props.data.ContactDetails.Email}
+							</small>
+						</p>
+					</h2>
+					<h1 className="display-3 mb-4 mt-0">Your Properties</h1>
+					{console.log(this.props.data)}
+					{this.props.data.PropertyDetailList.map((data, i) => {
+						return <PropertyCard data={data} target={i} key={i} />;
+					})}
+					<button
+						onClick={this.openAddPropertyModal}
+						className="btn btn-primary"
+					>
+						<span>
+							<i className="fas fa-plus" /> Add Property
+						</span>
+					</button>
 				</div>
-
 				<Modal
 					open={this.state.modalOpen}
 					onClose={this.closeAddPropertyModal}

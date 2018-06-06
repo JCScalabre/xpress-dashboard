@@ -7,7 +7,7 @@ export default class Profile extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h1>Profile Page</h1>
+				<h1>Profile View</h1>
 			</div>
 		);
 	}

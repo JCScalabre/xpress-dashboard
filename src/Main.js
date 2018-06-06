@@ -1,3 +1,4 @@
+//React:
 import React, { Component } from "react";
 // Components:
 import NavBar from "./components/NavBar.js";
@@ -5,18 +6,21 @@ import Properties from "./pages/Properties.js";
 import Referral from "./pages/Referral.js";
 import Profile from "./pages/Profile.js";
 import Login from "./pages/Login.js";
+// Cookie:
 import Cookie from "./utils/Cookie.js";
-// Data
+// Data:
+import API from "./utils/API.js";
 import { data } from "./data/ruthfigueroa0528atgmailcom.js";
 // CSS:
 import "./Main.css";
 // Firebase
 import FBconfig from "./utils/FirebaseConfig.js";
 import actionCodeSettings from "./utils/FirebaseActionCodeSettings.js";
+
+// Initialize Firebase:
 const firebase = require("firebase/app");
 require("firebase/auth");
 firebase.initializeApp(FBconfig);
-// Cookie:
 
 const topItems = [
 	{ as: "a", content: "Dashboard/Home", key: "dashboard", icon: "dashboard" },
@@ -29,7 +33,7 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h1>Dashboard Page</h1>
+				<h1>Dashboard / Home View</h1>
 			</div>
 		);
 	}
@@ -48,23 +52,26 @@ export default class Main extends Component {
 		};
 	}
 
-	componentWillMount = () => {
+	componentDidMount = () => {
 		this.handleCookie();
+		API.getData("jc_scalabre@hotmail.com");
 	};
 
 	handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
+	// First function to run when page loads, handles cookie:
 	handleCookie = () => {
-		// deleteAllCookies();
 		var email = Cookie.getCookie("email");
 		if (email === "") {
+			// Cookie not found so proceed to Firebase Auth:
 			this.firebaseAuth();
 		} else {
-			// Cookie exists so set state to logged in:
-			this.setState({ loggedIn: true });
+			// Cookie exists so log user in:
+			this.login();
 		}
 	};
 
+	// Firebase Authentication function:
 	firebaseAuth = () => {
 		if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
 			var email = window.localStorage.getItem("emailForSignIn");
@@ -80,7 +87,7 @@ export default class Main extends Component {
 				.then(
 					function(result) {
 						// Login was successful
-						this.setState({ loggedIn: true });
+						this.login();
 						// Create cookie
 						Cookie.setCookie("email", "jc_scalabre@hotmail.com", 60);
 						// Clear email from storage.
@@ -96,6 +103,7 @@ export default class Main extends Component {
 		}
 	};
 
+	// Send Firebase email to user after user submits their email:
 	sendEmail = () => {
 		if (this.state.email.trim() !== "") {
 			const email = this.state.email;
@@ -105,7 +113,6 @@ export default class Main extends Component {
 				.then(
 					function() {
 						// The link was successfully sent. Inform the user.
-						console.log("Email Sent" + email);
 						this.setState({
 							email: "",
 							isSuccess: true,
@@ -119,7 +126,6 @@ export default class Main extends Component {
 				.catch(
 					function(error) {
 						console.log(error);
-						// alert('Error!');
 						// Some error occurred, you can inspect the code: error.code
 						this.setState({
 							isSuccess: false,
@@ -130,10 +136,12 @@ export default class Main extends Component {
 		}
 	};
 
+	// Method to log user in:
 	login = () => {
 		this.setState({ loggedIn: true });
 	};
 
+	// Method to log user out:
 	logout = () => {
 		Cookie.deleteAllCookies();
 		this.setState({ loggedIn: false });

@@ -54,17 +54,7 @@ export default class PropertyCard extends Component {
         </div>
 
         <div className="card-body">
-          {this.props.hasAppeal ? (
-            <div>
-              <p className="card-text text-danger font-italic">
-                No current active Appeal. Press below to request one.
-              </p>
-              <a href="https://google.com" className="btn btn-success">
-                <i className="far fa-file-alt" />
-                <span> Request Appeal</span>
-              </a>
-            </div>
-          ) : (
+          {this.props.data.appealCandidate ? (
             <div>
               <p className="card-text text-success">Current Active Appeal:</p>
               <table className="table table-bordered text-center">
@@ -87,6 +77,16 @@ export default class PropertyCard extends Component {
                   </tr>
                 </tbody>
               </table>
+            </div>
+          ) : (
+            <div>
+              <p className="card-text text-danger font-italic">
+                No current active Appeal. Press below to request one.
+              </p>
+              <a href="https://google.com" className="btn btn-success">
+                <i className="far fa-file-alt" />
+                <span> Request Appeal</span>
+              </a>
             </div>
           )}
         </div>
